@@ -14,3 +14,17 @@ $RECYCLE.BIN/
 
 # Log files
 *.log
+
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+build/
+dist/
+
+# Env files
+.env*.local

@@ -1,80 +1,81 @@
 # MDR - Learning Management System & Student Dashboard
 
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Bootstrap 5](https://img.shields.io/badge/Bootstrap-5.1.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![Chart.js](https://img.shields.io/badge/Chart.js-3.x-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Bootstrap 5](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![Chart.js](https://img.shields.io/badge/Chart.js-4.x-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
 
-A responsive web application featuring a marketing landing page and a feature-rich student dashboard. This project was developed as a case study milestone (GameLab Indonesia x UKK), highlighting fundamental competencies in UI slicing from design mockups, mobile-first responsive design, DOM manipulation, and browser data persistence.
+A fullstack-ready educational web platform featuring a high-conversion marketing landing page and an interactive student dashboard. Originally developed as a vocational milestone (GameLab Indonesia x UKK), this project has been modernized and re-architected from static HTML/CSS/jQuery into **Next.js (App Router) + TypeScript** while preserving 100% of its original pixel-perfect aesthetics and responsive design.
 
 ---
 
 ## Key Features
 
-### 1. Marketing & Course Landing Page
-* **Hero & Category Navigation:** Mobile-responsive navbar with smooth section scrolling.
-* **Course & Class Directory:** Card-based catalog showcasing active classes, course metadata, and instructor bios.
-* **Responsive Layout:** Built with Bootstrap 5 grid, custom CSS media queries, and back-to-top scroll triggers.
+### 1. Marketing & Course Landing Page (`/`)
+* **Hero & Search Bar:** High-performance pre-rendered landing page with search action.
+* **Top Categories & Class Directory:** Dynamic course grids and instructor cards with optimized local assets.
+* **Responsive Layout:** Smooth anchor scrolling, passive event-managed back-to-top trigger, and responsive navbar collapse.
 
-### 2. Interactive Student Dashboard
+### 2. Interactive Student Dashboard (`/dashboard`)
 * **Persistent Task Manager (CRUD):** 
-  * Full create, read, update, and delete workflow for daily student tasks.
-  * Synchronized with browser `localStorage` to preserve state across sessions.
-  * Implemented input sanitization against XSS and safe fallback default records.
+  * Full create, read, update, and delete workflow for student assignments.
+  * Encapsulated via custom React hook (`useTaskManager`) synchronized with browser `localStorage`.
 * **Data Visualization:**
-  * Interactive line charts (weekly performance tracking) and pie charts powered by **Chart.js**.
-* **Multi-View Application Modules:**
-  * **Courses (`courses.html`):** Grid of enrolled and available classes.
-  * **Social & Friends (`friends.html`):** Peer network with online status badges.
-  * **Real-Time Style Messenger (`chat.html`):** Interactive multi-user chat interface with pill-based conversations.
-  * **Student Profile (`profile.html`):** Tabbed user bio, social links, and enrolled course history.
-  * **Account Settings (`settings.html`):** Profile customization layout and preferences.
-  * **Membership Upgrade (`upgrade.html`):** Resource expansion tiers and billing overview.
-* **Offcanvas Mobile Navigation:** Toggleable sidebar drawer for seamless navigation on small viewports.
+  * Client-hydrated **Line Charts** (weekly learning hours) and **Pie Charts** (category distribution) powered by **Chart.js**.
+* **Unified Dual-Sidebar Shell:**
+  * **Left Sidebar:** App-wide navigation with automated active-route indicator (`usePathname`) and bottom-pinned logout.
+  * **Right Sidebar:** Persistent user profile dropdown, skill progress bars, and upcoming schedule cards.
+* **Sub-Modules:**
+  * **All Courses (`/dashboard/courses`):** Filterable category tabs and progress track indicators.
+  * **Peer Network (`/dashboard/friends`):** Interactive peer directory with online/offline indicators and instant message triggers.
+  * **Real-Time Messenger (`/dashboard/chat`):** Interactive chat window with live message state across friend conversations.
+  * **Student Profile (`/dashboard/profile`):** Tabbed public view for Bio, Peers, and Course badges.
+  * **Settings (`/dashboard/settings`):** Controlled preference forms with instant confirmation alerts.
+  * **Upgrade Plans (`/dashboard/upgrade`):** Tier pricing cards with active plan selection.
 
 ---
 
 ## Project Structure
 
 ```text
-├── index.html                    # Root entry-point (routing to landing page)
-├── README.md                     # Technical documentation & project portfolio context
-├── Landing Page/
-│   ├── index.html                # Main landing page
-│   ├── css/                      # Landing page stylesheets
-│   ├── js/                       # Scroll & interaction scripts
-│   └── img/                      # Class previews, instructors, and banners
-└── Dashboard/
-    ├── dashboard.html            # Main dashboard overview & analytics
-    ├── courses.html              # Course listings
-    ├── chat.html                 # Chat messaging simulation
-    ├── friends.html              # Peer network directory
-    ├── profile.html              # User profile & public tabs
-    ├── settings.html             # Profile settings
-    ├── upgrade.html              # Subscription & tier options
-    ├── css/                      # Dashboard UI themes
-    ├── js/
-    │   └── main.js               # Task store (localStorage CRUD) & Chart.js logic
-    └── img/                      # Avatars, badges, and card assets
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx              # Root HTML shell + Google Fonts (Poppins/Raleway/Oswald)
+│   │   ├── page.tsx                # Marketing Landing Page
+│   │   └── dashboard/
+│   │       ├── layout.tsx          # Dual-Sidebar Shell (Left & Right aside)
+│   │       ├── page.tsx            # Analytics & Task Tracker
+│   │       ├── courses/page.tsx    # Course catalog
+│   │       ├── chat/page.tsx       # Live chat simulator
+│   │       ├── friends/page.tsx    # Peer network
+│   │       ├── profile/page.tsx    # User bio & tabs
+│   │       ├── settings/page.tsx   # Account form
+│   │       └── upgrade/page.tsx    # Pricing tiers
+│   ├── components/
+│   │   ├── dashboard/              # LeftSidebar, RightSidebar, TaskTable, AnalyticsCharts
+│   │   └── marketing/              # LandingNavbar, LandingFooter
+│   ├── hooks/                      # useTaskManager (localStorage synchronization)
+│   ├── styles/                     # globals.css, dashboard.css, landing.css
+│   └── types/                      # TypeScript definitions (Task, Course, Friend)
+├── public/img/                     # Optimized visual assets
+└── legacy-static/                  # Archived original static HTML/CSS files
 ```
 
 ---
 
 ## Technical Stack
 
-* **Markup & Structure:** Semantic HTML5
-* **Styling & Layout:** Vanilla CSS3 + Bootstrap 5.1.3
-* **Icons & Fonts:** FontAwesome 5, Boxicons, Google Fonts (Poppins, Raleway, Oswald)
-* **Scripting:** Vanilla JavaScript (ES6) & jQuery 3.6
-* **Data Visualization:** Chart.js
-* **Persistence:** Web Storage API (`localStorage`)
+* **Framework:** Next.js 14 (App Router, Server & Client Components)
+* **Language:** TypeScript 5.x
+* **Core Library:** React 18
+* **Styling:** Bootstrap 5.3 + Custom CSS Modules + Boxicons + FontAwesome
+* **Data Visualization:** Chart.js 4.x + React-Chartjs-2
+* **Storage:** Web Storage API (`localStorage`)
 
 ---
 
 ## Getting Started Locally
-
-No build tools or package installations required. 
 
 1. **Clone the repository:**
    ```bash
@@ -82,9 +83,22 @@ No build tools or package installations required.
    cd edulearn-portal-ui
    ```
 
-2. **Open in browser:**
-   * Double-click `index.html` to open directly in any modern browser, or
-   * Serve with VS Code extension **Live Server** for hot-reloading.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+4. **Production build:**
+   ```bash
+   npm run build
+   npm run start
+   ```
 
 ---
 
@@ -93,3 +107,4 @@ No build tools or package installations required.
 * **Developer:** [Dihya Ramdhan](https://github.com/mdr25)
 * **Program:** Case Study Project - GameLab Indonesia x UKK SMK
 * **Original Preview Reference:** [GameLab Project Showcase](https://www.gamelab.id/project/3640/preview_web?pn=dashboard)
+
