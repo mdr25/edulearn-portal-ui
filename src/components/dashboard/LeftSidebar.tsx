@@ -51,11 +51,11 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
             );
           })}
 
-          <div className="sc-left text-center">
+          <div className="sc-left d-flex flex-column align-items-center justify-content-center text-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="rounded-circle" src="/img/csleft.png" width="90" alt="Upgrade" />
-            <p className="my-3">Upgrade for more resources</p>
-            <Link className="btn2" href="/dashboard/upgrade" onClick={onClose}>
+            <img className="rounded-circle mx-auto d-block" src="/img/csleft.png" width="90" height="90" alt="Upgrade" />
+            <p className="my-3 text-center">Upgrade for more resources</p>
+            <Link className="btn2 mx-auto" href="/dashboard/upgrade" onClick={onClose}>
               Upgrade
             </Link>
           </div>
